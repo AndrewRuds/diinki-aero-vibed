@@ -1,0 +1,1270 @@
+/*
+ * Diinki Aero for GTK4 / libadwaita
+ *
+ * This file is imported by ~/.config/gtk-4.0/gtk.css (with the assets/
+ * folder next to it). GTK loads it at "user" priority on top of the stock
+ * Adwaita stylesheet, and every property set here beats Adwaita no matter how
+ * specific Adwaita's own selector is. So this theme only restyles: it leaves
+ * sizes, spacing and layout to libadwaita, and every broad rule below comes
+ * with matching rules for the flat variants libadwaita relies on.
+ *
+ * Targets GTK 4.16+ and libadwaita 1.6+ (CSS variables, color-mix()).
+ * Tested on GTK 4.24 / libadwaita 1.10 (Fedora 45, GNOME 51).
+ */
+
+/***********
+ * Palette *
+ ***********/
+
+/* Named colors: used by libadwaita, by plain GTK4 apps and by app CSS. */
+@define-color accent_bg_color #3399ff;
+@define-color accent_fg_color #ffffff;
+@define-color accent_color #0066cc;
+
+@define-color destructive_bg_color #d32f2f;
+@define-color destructive_fg_color #ffffff;
+@define-color destructive_color #c00000;
+@define-color success_bg_color #06b025;
+@define-color success_fg_color #ffffff;
+@define-color success_color #068a1e;
+@define-color warning_bg_color #ff9900;
+@define-color warning_fg_color #000000;
+@define-color warning_color #b36b00;
+@define-color error_bg_color #cc0000;
+@define-color error_fg_color #ffffff;
+@define-color error_color #cc0000;
+
+@define-color window_bg_color #f0f0f0;
+@define-color window_fg_color #000000;
+@define-color view_bg_color #ffffff;
+@define-color view_fg_color #000000;
+@define-color headerbar_bg_color #c3d8f1;
+@define-color headerbar_fg_color #000000;
+@define-color headerbar_border_color #8ba6c9;
+@define-color headerbar_backdrop_color #d6dfeb;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.18);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.3);
+@define-color sidebar_bg_color #f7fafd;
+@define-color sidebar_fg_color #000000;
+@define-color sidebar_backdrop_color #f7f8fa;
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.07);
+@define-color sidebar_border_color #d5dfe9;
+@define-color secondary_sidebar_bg_color #fbfcfe;
+@define-color secondary_sidebar_fg_color #000000;
+@define-color secondary_sidebar_backdrop_color #fbfbfc;
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.07);
+@define-color secondary_sidebar_border_color #d5dfe9;
+@define-color card_bg_color #ffffff;
+@define-color card_fg_color #000000;
+@define-color card_shade_color rgba(0, 0, 0, 0.1);
+@define-color dialog_bg_color #f0f0f0;
+@define-color dialog_fg_color #000000;
+@define-color popover_bg_color #f5f6f7;
+@define-color popover_fg_color #000000;
+@define-color popover_shade_color rgba(0, 0, 0, 0.1);
+@define-color thumbnail_bg_color #ffffff;
+@define-color thumbnail_fg_color #000000;
+@define-color shade_color rgba(0, 0, 0, 0.1);
+@define-color scrollbar_outline_color #ffffff;
+
+/* Legacy names some GTK4 apps still read. */
+@define-color theme_fg_color #000000;
+@define-color theme_text_color #000000;
+@define-color theme_bg_color #f0f0f0;
+@define-color theme_base_color #ffffff;
+@define-color theme_selected_bg_color #3399ff;
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_unfocused_fg_color #000000;
+@define-color theme_unfocused_text_color #000000;
+@define-color theme_unfocused_bg_color #f0f0f0;
+@define-color theme_unfocused_base_color #ffffff;
+@define-color theme_unfocused_selected_bg_color #3399ff;
+@define-color theme_unfocused_selected_fg_color #ffffff;
+@define-color insensitive_bg_color #e4e4e4;
+@define-color insensitive_fg_color #6d6d6d;
+@define-color insensitive_base_color #ffffff;
+@define-color unfocused_insensitive_color #e4e4e4;
+@define-color borders #b4b4b4;
+@define-color unfocused_borders #b4b4b4;
+
+/* libadwaita 1.6+ CSS variables. Aero is a light theme, so these are set
+   unconditionally and a dark-mode preference keeps the light look. */
+:root {
+  --accent-bg-color: #3399ff;
+  --accent-fg-color: #ffffff;
+  --accent-color: #0066cc;
+  --destructive-bg-color: #d32f2f;
+  --destructive-fg-color: #ffffff;
+  --destructive-color: #c00000;
+  --success-bg-color: #06b025;
+  --success-fg-color: #ffffff;
+  --success-color: #068a1e;
+  --warning-bg-color: #ff9900;
+  --warning-fg-color: #000000;
+  --warning-color: #b36b00;
+  --error-bg-color: #cc0000;
+  --error-fg-color: #ffffff;
+  --error-color: #cc0000;
+
+  --window-bg-color: #f0f0f0;
+  --window-fg-color: #000000;
+  --view-bg-color: #ffffff;
+  --view-fg-color: #000000;
+  --headerbar-bg-color: #c3d8f1;
+  --headerbar-fg-color: #000000;
+  --headerbar-border-color: #8ba6c9;
+  --headerbar-backdrop-color: #d6dfeb;
+  --headerbar-shade-color: rgba(0, 0, 0, 0.18);
+  --headerbar-darker-shade-color: rgba(0, 0, 0, 0.3);
+  --sidebar-bg-color: #f7fafd;
+  --sidebar-fg-color: #000000;
+  --sidebar-backdrop-color: #f7f8fa;
+  --sidebar-border-color: #d5dfe9;
+  --sidebar-shade-color: rgba(0, 0, 0, 0.07);
+  --secondary-sidebar-bg-color: #fbfcfe;
+  --secondary-sidebar-fg-color: #000000;
+  --secondary-sidebar-backdrop-color: #fbfbfc;
+  --secondary-sidebar-border-color: #d5dfe9;
+  --secondary-sidebar-shade-color: rgba(0, 0, 0, 0.07);
+  --card-bg-color: #ffffff;
+  --card-fg-color: #000000;
+  --card-shade-color: rgba(0, 0, 0, 0.1);
+  --dialog-bg-color: #f0f0f0;
+  --dialog-fg-color: #000000;
+  --popover-bg-color: #f5f6f7;
+  --popover-fg-color: #000000;
+  --popover-shade-color: rgba(0, 0, 0, 0.1);
+  --thumbnail-bg-color: #ffffff;
+  --thumbnail-fg-color: #000000;
+  --shade-color: rgba(0, 0, 0, 0.1);
+  --scrollbar-outline-color: #ffffff;
+  --active-toggle-bg-color: #ffffff;
+  --active-toggle-fg-color: #000000;
+  --overview-bg-color: #e9eef5;
+  --overview-fg-color: #000000;
+  --border-color: #b4b4b4;
+  --dim-opacity: 60%;
+  --disabled-opacity: 50%;
+}
+
+/***************
+ * Text select *
+ ***************/
+
+selection,
+text > selection,
+label > selection,
+textview > text > selection {
+  background-color: #3399ff;
+  color: #ffffff;
+}
+
+text > selection:backdrop,
+label > selection:backdrop {
+  background-color: #cfcfcf;
+  color: #000000;
+}
+
+link, button.link > label { color: #0066cc; }
+link:visited, button.link:visited > label { color: #6d2a9e; }
+
+/*********************************
+ * Header bars and toolbar views *
+ *********************************/
+
+/* Shared "glass" look: frosted blue with a light upper half. */
+headerbar,
+toolbarview > .top-bar,
+.titlebar:not(headerbar) {
+  color: #000000;
+  background-color: #c3d8f1;
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2) 48%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(to bottom, #a9c6ea, #d3e4f8);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.7), inset 0 -1px #8ba6c9;
+}
+
+headerbar:backdrop,
+toolbarview > .top-bar:backdrop,
+.titlebar:not(headerbar):backdrop {
+  background-color: #d6dfeb;
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(to bottom, #c4d0e0, #e1e8f1);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.6), inset 0 -1px #a9b6c8;
+}
+
+/* Headerbars inside a toolbar view draw nothing: the bar behind them
+   already has the glass, and this keeps split views (Nautilus, Settings)
+   one continuous strip with matching heights. */
+toolbarview > .top-bar headerbar,
+toolbarview > .top-bar headerbar:backdrop,
+window > .titlebar headerbar,
+window > .titlebar headerbar:backdrop,
+headerbar.flat,
+headerbar.flat:backdrop {
+  background: none;
+  box-shadow: none;
+}
+
+toolbarview > .top-bar searchbar > revealer > box,
+toolbarview > .top-bar tabbar > .box {
+  background: none;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.45);
+}
+
+/* Do not fade the whole bar when the window is unfocused. */
+headerbar:backdrop > windowhandle,
+toolbarview > .top-bar:backdrop > windowhandle,
+toolbarview > .bottom-bar:backdrop > windowhandle {
+  filter: none;
+}
+
+headerbar .title,
+toolbarview > .top-bar .title {
+  font-weight: bold;
+  color: #000000;
+}
+
+headerbar .subtitle { color: rgba(0, 0, 0, 0.65); }
+
+/* Bottom bars and action bars: plain light toolbar. */
+toolbarview > .bottom-bar,
+actionbar > revealer > box {
+  color: #000000;
+  background-color: #eef3f9;
+  background-image: linear-gradient(to bottom, #f6f9fd, #e3ebf5);
+  box-shadow: inset 0 1px #b9c9dd;
+}
+
+toolbarview > .bottom-bar actionbar > revealer > box {
+  background: none;
+  box-shadow: none;
+}
+
+searchbar > revealer > box {
+  background-color: #eef3f9;
+  box-shadow: inset 0 -1px #b9c9dd;
+}
+
+/*******************
+ * Window controls *
+ *******************/
+
+/* The Aero caption images are drawn on the button's inner image node, so
+   the generic flat-button rules (which also match these buttons) can't
+   wipe them. The symbolic icon itself is hidden with a zero icon size. */
+windowcontrols { border-spacing: 2px; }
+
+windowcontrols > button,
+windowcontrols > button:hover,
+windowcontrols > button:active,
+windowcontrols > button:backdrop,
+headerbar windowcontrols > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+headerbar windowcontrols > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+headerbar windowcontrols > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+windowcontrols > button > image,
+windowcontrols > button:hover > image,
+windowcontrols > button:active > image {
+  min-width: 31px;
+  min-height: 17px;
+  padding: 0;
+  -gtk-icon-size: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 31px 17px;
+}
+
+windowcontrols > button.close > image { background-image: url("assets/close-normal.png"); }
+windowcontrols > button.close:hover > image { background-image: url("assets/close-hover.png"); }
+windowcontrols > button.close:active > image { background-image: url("assets/close-active.png"); }
+windowcontrols > button.close:backdrop > image { background-image: url("assets/close-backdrop.png"); }
+windowcontrols > button.close:backdrop:hover > image { background-image: url("assets/close-hover.png"); }
+
+windowcontrols > button.minimize > image { background-image: url("assets/minimize-normal.png"); }
+windowcontrols > button.minimize:hover > image { background-image: url("assets/minimize-hover.png"); }
+windowcontrols > button.minimize:active > image { background-image: url("assets/minimize-active.png"); }
+windowcontrols > button.minimize:backdrop > image { background-image: url("assets/minimize-backdrop.png"); }
+windowcontrols > button.minimize:backdrop:hover > image { background-image: url("assets/minimize-hover.png"); }
+
+windowcontrols > button.maximize > image { background-image: url("assets/maximize-normal.png"); }
+windowcontrols > button.maximize:hover > image { background-image: url("assets/maximize-hover.png"); }
+windowcontrols > button.maximize:active > image { background-image: url("assets/maximize-active.png"); }
+windowcontrols > button.maximize:backdrop > image { background-image: url("assets/maximize-backdrop.png"); }
+windowcontrols > button.maximize:backdrop:hover > image { background-image: url("assets/maximize-hover.png"); }
+
+window.maximized windowcontrols > button.maximize > image { background-image: url("assets/restore-normal.png"); }
+window.maximized windowcontrols > button.maximize:hover > image { background-image: url("assets/restore-hover.png"); }
+window.maximized windowcontrols > button.maximize:active > image { background-image: url("assets/restore-active.png"); }
+window.maximized windowcontrols > button.maximize:backdrop > image { background-image: url("assets/restore-backdrop.png"); }
+
+/***********
+ * Buttons *
+ ***********/
+
+/* Raised button: the classic glossy Aero button. */
+button:not(.flat),
+dropdown > button,
+menubutton.raised > button {
+  color: #000000;
+  background-color: #e5e5e5;
+  background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb 49%, #dddddd 51%, #cfcfcf);
+  box-shadow: inset 0 0 0 1px #8e8f8f, inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+  border-radius: 3px;
+  text-shadow: none;
+}
+
+button:not(.flat):hover,
+dropdown > button:hover,
+menubutton.raised > button:hover {
+  background-color: #d9effc;
+  background-image: linear-gradient(to bottom, #eaf6fd, #d9f0fc 49%, #bee6fd 51%, #a7d9f5);
+  box-shadow: inset 0 0 0 1px #3c7fb1, inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+}
+
+button:not(.flat):active,
+button:not(.flat):checked,
+dropdown > button:active,
+dropdown > button:checked,
+menubutton.raised > button:active,
+menubutton.raised > button:checked {
+  background-color: #c4e5f6;
+  background-image: linear-gradient(to bottom, #e5f4fc, #c4e5f6 49%, #98d1ef 51%, #68b3db);
+  box-shadow: inset 0 0 0 1px #2c628b, inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+button:not(.flat):checked:hover {
+  background-image: linear-gradient(to bottom, #eaf6fd, #cbe9f8 49%, #a4d6f1 51%, #7cc0e3);
+}
+
+button:not(.flat):disabled,
+dropdown > button:disabled {
+  color: #838383;
+  background-color: #f4f4f4;
+  background-image: none;
+  box-shadow: inset 0 0 0 1px #adb2b5;
+  filter: none;
+}
+
+button:not(.flat):backdrop:not(:hover):not(:checked):not(:active):not(:disabled) {
+  box-shadow: inset 0 0 0 1px #a0a0a0, inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+}
+
+/* Suggested / destructive / opaque */
+button.suggested-action,
+button.suggested-action.flat {
+  color: #ffffff;
+  background-color: #3399ff;
+  background-image: linear-gradient(to bottom, #7cc0ff, #4aa3f5 49%, #1f86e8 51%, #3a9af0);
+  box-shadow: inset 0 0 0 1px #1a5f9e, inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+}
+
+button.suggested-action:hover {
+  background-image: linear-gradient(to bottom, #95ccff, #63b1f8 49%, #3593ed 51%, #52a8f3);
+}
+
+button.suggested-action:active,
+button.suggested-action:checked {
+  background-image: linear-gradient(to bottom, #3b8fdd, #2a7ccc 49%, #1667b8 51%, #2477c8);
+  box-shadow: inset 0 0 0 1px #144c80, inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+button.destructive-action,
+button.destructive-action.flat {
+  color: #ffffff;
+  background-color: #d32f2f;
+  background-image: linear-gradient(to bottom, #f08a80, #e2544a 49%, #c92a20 51%, #d84237);
+  box-shadow: inset 0 0 0 1px #7d1a14, inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+button.destructive-action:hover {
+  background-image: linear-gradient(to bottom, #f6a199, #e96a61 49%, #d63c32 51%, #e2564b);
+}
+
+button.destructive-action:active,
+button.destructive-action:checked {
+  background-image: linear-gradient(to bottom, #c8443b, #b8352c 49%, #a3221a 51%, #b02e25);
+  box-shadow: inset 0 0 0 1px #6a140f, inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+button.suggested-action:disabled,
+button.destructive-action:disabled {
+  color: #838383;
+  background-image: none;
+  background-color: #f4f4f4;
+  box-shadow: inset 0 0 0 1px #adb2b5;
+}
+
+/* Shapes libadwaita expects to keep. */
+button.circular,
+button.circular:hover,
+button.circular:active,
+button.circular:checked { border-radius: 9999px; }
+
+button.pill,
+button.pill:hover,
+button.pill:active { border-radius: 9999px; }
+
+/* Flat buttons: invisible at rest, Explorer-toolbar highlight on hover.
+   This covers .flat and every place libadwaita flattens buttons on its own
+   (header bars, toolbars, action bars, tab bars, view switchers…). */
+button.flat,
+headerbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+headerbar button.arrow-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+headerbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+headerbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > button,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button,
+.toolbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+.toolbar button.arrow-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+.toolbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+.toolbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button,
+.toolbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > button,
+.toolbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button,
+actionbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+actionbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button,
+searchbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque),
+tabbar button.image-button,
+tab button,
+viewswitcher button,
+stackswitcher button.flat,
+spinbutton > button,
+entry > button,
+calendar > header > button,
+popover.menu box.inline-buttons button,
+.navigation-sidebar button.flat,
+row button.flat,
+.osd button.flat {
+  color: inherit;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+button.flat:hover,
+headerbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+headerbar button.arrow-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+headerbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+headerbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:hover,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:hover,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button:hover,
+.toolbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+.toolbar button.arrow-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+.toolbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+.toolbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:hover,
+.toolbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:hover,
+.toolbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button:hover,
+actionbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+actionbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:hover,
+searchbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover,
+tabbar button.image-button:hover,
+viewswitcher button:hover,
+stackswitcher button.flat:hover,
+calendar > header > button:hover,
+popover.menu box.inline-buttons button:hover,
+row button.flat:hover {
+  background-color: #e5f3fb;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 51%), linear-gradient(to bottom, #e3f1fb, #c7e4f7);
+  box-shadow: inset 0 0 0 1px #7da2ce, inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+button.flat:active,
+button.flat:checked,
+headerbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+headerbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked,
+headerbar button.arrow-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+headerbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+headerbar button.image-text-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked,
+headerbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:active,
+headerbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:checked,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:active,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button:active,
+headerbar splitbutton:not(.raised):not(.suggested-action):not(.destructive-action) > menubutton > button:checked,
+.toolbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+.toolbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked,
+.toolbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:active,
+.toolbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:checked,
+actionbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+actionbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked,
+actionbar menubutton:not(.raised):not(.suggested-action):not(.destructive-action) > button:checked,
+searchbar button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+tabbar button.image-button:active,
+viewswitcher button:active,
+viewswitcher button:checked,
+stackswitcher button.flat:checked,
+calendar > header > button:active,
+popover.menu box.inline-buttons button:active,
+row button.flat:active,
+row button.flat:checked {
+  background-color: #c4e2f6;
+  background-image: linear-gradient(to bottom, #cde6f7, #a9d3f0);
+  box-shadow: inset 0 0 0 1px #5e8bbd, inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+button.flat:disabled,
+headerbar button.image-button:disabled,
+.toolbar button.image-button:disabled {
+  background: none;
+  box-shadow: none;
+}
+
+/* Linked groups stay raised, even inside header bars. */
+.linked > button:not(.flat),
+headerbar .linked > button.image-button:not(.flat),
+headerbar .linked > button.image-text-button:not(.flat),
+headerbar .linked > menubutton > button,
+headerbar .linked > splitbutton > button,
+headerbar .linked > splitbutton > menubutton > button {
+  color: #000000;
+  background-color: #e5e5e5;
+  background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb 49%, #dddddd 51%, #cfcfcf);
+  box-shadow: inset 0 0 0 1px #8e8f8f, inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+}
+
+.linked > button:not(.flat):hover,
+headerbar .linked > button.image-button:not(.flat):hover,
+headerbar .linked > button.image-text-button:not(.flat):hover,
+headerbar .linked > menubutton > button:hover,
+headerbar .linked > splitbutton > button:hover,
+headerbar .linked > splitbutton > menubutton > button:hover {
+  background-image: linear-gradient(to bottom, #eaf6fd, #d9f0fc 49%, #bee6fd 51%, #a7d9f5);
+  box-shadow: inset 0 0 0 1px #3c7fb1, inset 0 0 0 2px rgba(255, 255, 255, 0.75);
+}
+
+.linked > button:not(.flat):active,
+.linked > button:not(.flat):checked,
+headerbar .linked > button.image-button:not(.flat):checked,
+headerbar .linked > button.image-button:not(.flat):active,
+headerbar .linked > button.image-text-button:not(.flat):checked,
+headerbar .linked > menubutton > button:checked,
+headerbar .linked > splitbutton > menubutton > button:checked {
+  background-image: linear-gradient(to bottom, #e5f4fc, #c4e5f6 49%, #98d1ef 51%, #68b3db);
+  box-shadow: inset 0 0 0 1px #2c628b, inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* Toggle groups (AdwToggleGroup) */
+toggle-group {
+  background-color: #e3e6ea;
+  background-image: none;
+  box-shadow: inset 0 0 0 1px #9aa3ad;
+  border-radius: 4px;
+}
+
+toggle-group > toggle,
+toggle-group > toggle:hover {
+  color: #000000;
+  background: none;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+toggle-group > toggle:hover:not(:checked) { background-color: rgba(255, 255, 255, 0.55); }
+
+toggle-group > toggle:checked {
+  background-color: #ffffff;
+  background-image: linear-gradient(to bottom, #ffffff, #e8f3fc);
+  box-shadow: inset 0 0 0 1px #7da2ce;
+}
+
+/*************************
+ * Entries / spinbuttons *
+ *************************/
+
+entry,
+spinbutton,
+.linked > entry {
+  color: #000000;
+  background-color: #ffffff;
+  background-image: none;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px #abadb3, inset 0 1px #7a7a7a;
+  outline: none;
+}
+
+entry:hover,
+spinbutton:hover {
+  box-shadow: inset 0 0 0 1px #7eb4ea, inset 0 1px #5793c8;
+}
+
+entry:focus-within,
+spinbutton:focus-within {
+  box-shadow: inset 0 0 0 1px #3d7bad, inset 0 1px #3d7bad;
+  outline: none;
+}
+
+entry:disabled,
+spinbutton:disabled {
+  color: #6d6d6d;
+  background-color: #f4f4f4;
+  box-shadow: inset 0 0 0 1px #c2c4c8;
+  filter: none;
+}
+
+entry.error,
+entry.error:focus-within { box-shadow: inset 0 0 0 1px #cc0000; }
+
+entry.warning,
+entry.warning:focus-within { box-shadow: inset 0 0 0 1px #ff9900; }
+
+entry.success,
+entry.success:focus-within { box-shadow: inset 0 0 0 1px #06b025; }
+
+entry.flat,
+entry.flat:hover,
+entry.flat:focus-within,
+editablelabel entry {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+entry.search,
+searchbar entry {
+  border-radius: 3px;
+}
+
+/* Inside header bars, entries sit on the glass like Explorer's address bar. */
+headerbar entry,
+toolbarview > .top-bar entry {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 0 0 1px #8ba6c9, inset 0 1px rgba(0, 0, 0, 0.25);
+}
+
+headerbar entry:focus-within,
+toolbarview > .top-bar entry:focus-within {
+  background-color: #ffffff;
+  box-shadow: inset 0 0 0 1px #3d7bad;
+}
+
+entry > progress > trough > progress {
+  background-color: #3399ff;
+  background-image: none;
+}
+
+/*************
+ * Selection *
+ *************/
+
+/* Explorer-style selection: pale blue gradient with a crisp blue outline.
+   Used by list, grid and column views, the sidebar and flow boxes. */
+listview > row:hover,
+gridview > child:hover,
+columnview > listview > row:hover,
+flowbox > flowboxchild:hover,
+.navigation-sidebar > row:hover,
+list.boxed-list > row.activatable:hover,
+.boxed-list > row.activatable:hover {
+  background-color: #eaf5ff;
+  background-image: linear-gradient(to bottom, #f2f9ff, #e1f0fd);
+  box-shadow: inset 0 0 0 1px #b8d6fb;
+}
+
+listview > row:selected,
+gridview > child:selected,
+columnview > listview > row:selected,
+flowbox > flowboxchild:selected,
+.navigation-sidebar > row:selected,
+list.view > row:selected {
+  color: #000000;
+  background-color: #cce8ff;
+  background-image: linear-gradient(to bottom, #dcebfc, #c1dcfc);
+  box-shadow: inset 0 0 0 1px #7da2ce;
+}
+
+listview > row:selected:hover,
+gridview > child:selected:hover,
+columnview > listview > row:selected:hover,
+flowbox > flowboxchild:selected:hover,
+.navigation-sidebar > row:selected:hover {
+  background-image: linear-gradient(to bottom, #e3f0fe, #c8e2fd);
+  box-shadow: inset 0 0 0 1px #6e94c3;
+}
+
+listview > row:active,
+gridview > child:active,
+columnview > listview > row:active,
+.navigation-sidebar > row:active,
+.boxed-list > row.activatable:active {
+  background-image: linear-gradient(to bottom, #c1dcfc, #aed0f8);
+  box-shadow: inset 0 0 0 1px #6286b5;
+}
+
+listview > row:selected:backdrop,
+gridview > child:selected:backdrop,
+columnview > listview > row:selected:backdrop,
+flowbox > flowboxchild:selected:backdrop,
+.navigation-sidebar > row:selected:backdrop {
+  background-color: #e5e5e5;
+  background-image: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
+  box-shadow: inset 0 0 0 1px #b4b4b4;
+}
+
+/* Selected text inside rows must stay dark on the pale highlight. */
+listview > row:selected label,
+gridview > child:selected label,
+columnview > listview > row:selected label,
+.navigation-sidebar > row:selected label { color: #000000; }
+
+listview > row,
+gridview > child,
+.navigation-sidebar > row,
+flowbox > flowboxchild {
+  border-radius: 3px;
+}
+
+/* Column views (Nautilus list mode): no rounding across full-width rows. */
+columnview > listview > row,
+columnview > listview > row:selected { border-radius: 0; }
+
+columnview > header > button:not(.flat) {
+  color: #4c607a;
+  background-color: #ffffff;
+  background-image: none;
+  box-shadow: inset -1px 0 #e3e8ee, inset 0 -1px #d5d5d5;
+  border-radius: 0;
+}
+
+columnview > header > button:not(.flat):hover {
+  background-image: linear-gradient(to bottom, #f3f8fd, #e2eefa);
+  box-shadow: inset -1px 0 #c0d5ea, inset 0 -1px #c0d5ea;
+}
+
+/***************
+ * Sidebars    *
+ ***************/
+
+.sidebar-pane,
+.navigation-sidebar.background {
+  background-color: #f7fafd;
+  background-image: linear-gradient(to bottom, #fbfdff, #eef4fa);
+}
+
+.sidebar-pane:backdrop { background-image: none; background-color: #f7f8fa; }
+
+.sidebar-pane:dir(ltr),
+.sidebar-pane.end:dir(rtl) { box-shadow: inset -1px 0 #d5dfe9; }
+
+.sidebar-pane:dir(rtl),
+.sidebar-pane.end:dir(ltr) { box-shadow: inset 1px 0 #d5dfe9; }
+
+.navigation-sidebar,
+.navigation-sidebar.view { background-color: transparent; }
+
+.navigation-sidebar > .header > box > .heading,
+.navigation-sidebar .heading { color: #1e3287; }
+
+/*******************
+ * Lists and cards *
+ *******************/
+
+.boxed-list,
+.card,
+list.boxed-list {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #c9d3dd, 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.boxed-list > row,
+list.boxed-list > row { box-shadow: inset 0 -1px #e6ebf0; }
+
+.boxed-list > row:last-child,
+list.boxed-list > row:last-child { box-shadow: none; }
+
+/*********************
+ * Checks and radios *
+ *********************/
+
+check,
+radio,
+check:hover,
+radio:hover,
+check:active,
+radio:active,
+check:checked,
+radio:checked,
+check:indeterminate,
+radio:indeterminate {
+  min-width: 13px;
+  min-height: 13px;
+  -gtk-icon-size: 13px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  color: transparent;
+  background: none;
+  box-shadow: none;
+  filter: none;
+}
+
+check { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-unchecked.png"), url("assets/checkbox-unchecked@2.png")); }
+check:hover { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-unchecked-over.png"), url("assets/checkbox-unchecked-over@2.png")); }
+check:active { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-unchecked-active.png"), url("assets/checkbox-unchecked-active@2.png")); }
+check:disabled { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-unchecked-insensitive.png"), url("assets/checkbox-unchecked-insensitive@2.png")); }
+check:checked { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-checked.png"), url("assets/checkbox-checked@2.png")); }
+check:checked:hover { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-checked-over.png"), url("assets/checkbox-checked-over@2.png")); }
+check:checked:active { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-checked-active.png"), url("assets/checkbox-checked-active@2.png")); }
+check:checked:disabled { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-checked-insensitive.png"), url("assets/checkbox-checked-insensitive@2.png")); }
+check:indeterminate { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed.png"), url("assets/checkbox-mixed@2.png")); }
+check:indeterminate:hover { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed-over.png"), url("assets/checkbox-mixed-over@2.png")); }
+check:indeterminate:active { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed-active.png"), url("assets/checkbox-mixed-active@2.png")); }
+check:indeterminate:disabled { -gtk-icon-source: -gtk-scaled(url("assets/checkbox-mixed-insensitive.png"), url("assets/checkbox-mixed-insensitive@2.png")); }
+
+radio { -gtk-icon-source: -gtk-scaled(url("assets/radio-unchecked.png"), url("assets/radio-unchecked@2.png")); }
+radio:hover { -gtk-icon-source: -gtk-scaled(url("assets/radio-unchecked-over.png"), url("assets/radio-unchecked-over@2.png")); }
+radio:active { -gtk-icon-source: -gtk-scaled(url("assets/radio-unchecked-active.png"), url("assets/radio-unchecked-active@2.png")); }
+radio:disabled { -gtk-icon-source: -gtk-scaled(url("assets/radio-unchecked-insensitive.png"), url("assets/radio-unchecked-insensitive@2.png")); }
+radio:checked { -gtk-icon-source: -gtk-scaled(url("assets/radio-checked.png"), url("assets/radio-checked@2.png")); }
+radio:checked:hover { -gtk-icon-source: -gtk-scaled(url("assets/radio-checked-over.png"), url("assets/radio-checked-over@2.png")); }
+radio:checked:active { -gtk-icon-source: -gtk-scaled(url("assets/radio-checked-active.png"), url("assets/radio-checked-active@2.png")); }
+radio:checked:disabled { -gtk-icon-source: -gtk-scaled(url("assets/radio-checked-insensitive.png"), url("assets/radio-checked-insensitive@2.png")); }
+radio:indeterminate { -gtk-icon-source: -gtk-scaled(url("assets/radio-mixed.png"), url("assets/radio-mixed@2.png")); }
+radio:indeterminate:hover { -gtk-icon-source: -gtk-scaled(url("assets/radio-mixed-over.png"), url("assets/radio-mixed-over@2.png")); }
+radio:indeterminate:disabled { -gtk-icon-source: -gtk-scaled(url("assets/radio-mixed-insensitive.png"), url("assets/radio-mixed-insensitive@2.png")); }
+
+/* libadwaita "selection mode" checks (.selection-mode) are circular badges
+   over thumbnails; keep them readable with the same images. */
+checkbutton { outline-color: rgba(51, 153, 255, 0.5); }
+
+/**********
+ * Switch *
+ **********/
+
+switch {
+  border: none;
+  border-radius: 3px;
+  color: transparent;
+  background-color: #c9c9c9;
+  background-image: linear-gradient(to bottom, #b5b5b5, #d6d6d6);
+  box-shadow: inset 0 0 0 1px #8e8f8f, inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+switch:hover { background-image: linear-gradient(to bottom, #bcbcbc, #dddddd); }
+
+switch:checked {
+  background-color: #3399ff;
+  background-image: linear-gradient(to bottom, #2f86d8, #6bb6f5);
+  box-shadow: inset 0 0 0 1px #1a5f9e, inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+switch:disabled { filter: opacity(0.5); }
+
+switch > slider,
+switch:hover > slider,
+switch:checked > slider {
+  border-radius: 3px;
+  background-color: #eeeeee;
+  background-image: linear-gradient(to bottom, #fbfbfb, #ececec 49%, #dedede 51%, #d2d2d2);
+  box-shadow: inset 0 0 0 1px #707070, inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+switch:hover > slider {
+  background-image: linear-gradient(to bottom, #eaf6fd, #d9f0fc 49%, #bee6fd 51%, #a7d9f5);
+  box-shadow: inset 0 0 0 1px #3c7fb1, inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/****************
+ * Progress bar *
+ ****************/
+
+progressbar > trough {
+  min-height: 14px;
+  border-radius: 3px;
+  background-color: #e6e6e6;
+  background-image: linear-gradient(to bottom, #f3f3f3, #e0e0e0 50%, #d6d6d6 51%, #eaeaea);
+  box-shadow: inset 0 0 0 1px #a8a8a8, inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+progressbar.vertical > trough { min-height: 0; min-width: 14px; }
+
+progressbar.horizontal > trough > progress { min-height: 14px; }
+progressbar.vertical > trough > progress { min-width: 14px; }
+
+progressbar > trough > progress {
+  border-radius: 2px;
+  background-color: #06b025;
+  background-image: linear-gradient(to bottom, #cdffcd, #a6efb3 45%, #00d020 56%, #1ce233);
+  box-shadow: inset 0 0 0 1px rgba(0, 90, 20, 0.45);
+}
+
+progressbar.vertical > trough > progress {
+  background-image: linear-gradient(to right, #cdffcd, #a6efb3 45%, #00d020 56%, #1ce233);
+}
+
+/* Thin OSD bars (e.g. inside entries, Nautilus' operations button) */
+progressbar.osd > trough,
+.osd progressbar > trough {
+  min-height: 3px;
+  background-image: none;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+}
+
+progressbar.osd > trough > progress,
+.osd progressbar > trough > progress {
+  background-image: none;
+  background-color: #3399ff;
+  box-shadow: none;
+}
+
+levelbar > trough {
+  background-color: #e6e6e6;
+  box-shadow: inset 0 0 0 1px #a8a8a8;
+  border-radius: 3px;
+}
+
+levelbar > trough > block.filled { background-color: #06b025; }
+levelbar > trough > block.low { background-color: #ff9900; }
+levelbar > trough > block.high,
+levelbar > trough > block:not(.empty) { background-color: #06b025; }
+levelbar > trough > block.empty { background-color: transparent; }
+
+/*********
+ * Scale *
+ *********/
+
+scale > trough {
+  background-color: #e7eaea;
+  box-shadow: inset 0 0 0 1px #b0b6bb;
+  border-radius: 2px;
+}
+
+scale > trough > highlight {
+  background-color: #3399ff;
+  background-image: linear-gradient(to bottom, #6bb6f5, #2f86d8);
+  border-radius: 2px;
+}
+
+scale > trough > slider {
+  background-color: #eeeeee;
+  background-image: linear-gradient(to bottom, #fbfbfb, #ececec 49%, #dedede 51%, #d2d2d2);
+  box-shadow: inset 0 0 0 1px #707070, inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+scale > trough > slider:hover,
+scale > trough > slider:active {
+  background-image: linear-gradient(to bottom, #eaf6fd, #d9f0fc 49%, #bee6fd 51%, #a7d9f5);
+  box-shadow: inset 0 0 0 1px #3c7fb1, inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/**************
+ * Scrollbars *
+ **************/
+
+/* Keep libadwaita's overlay scrollbars (they fit modern layouts), but draw
+   the slider as a small glossy Aero thumb. */
+scrollbar > range > trough > slider {
+  background-color: #c2c2c2;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+}
+
+scrollbar.vertical > range > trough > slider {
+  background-image: linear-gradient(to right, #d8d8d8, #c8c8c8 49%, #b8b8b8 51%, #c4c4c4);
+}
+
+scrollbar.horizontal > range > trough > slider {
+  background-image: linear-gradient(to bottom, #d8d8d8, #c8c8c8 49%, #b8b8b8 51%, #c4c4c4);
+}
+
+scrollbar > range > trough > slider:hover {
+  background-color: #a7d9f5;
+  border-color: rgba(60, 127, 177, 0.6);
+}
+
+scrollbar.vertical > range > trough > slider:hover,
+scrollbar.vertical > range > trough > slider:active {
+  background-image: linear-gradient(to right, #d9f0fc, #bee6fd 49%, #a7d9f5 51%, #b8e0f7);
+}
+
+scrollbar.horizontal > range > trough > slider:hover,
+scrollbar.horizontal > range > trough > slider:active {
+  background-image: linear-gradient(to bottom, #d9f0fc, #bee6fd 49%, #a7d9f5 51%, #b8e0f7);
+}
+
+scrollbar.hovering > range > trough,
+scrollbar.dragging > range > trough {
+  background-color: rgba(240, 240, 240, 0.85);
+}
+
+/***********************
+ * Popovers and menus  *
+ ***********************/
+
+popover > contents,
+popover > arrow {
+  color: #000000;
+  background-color: #f5f6f7;
+  box-shadow: 0 0 0 1px #979797, 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+popover.menu > contents { border-radius: 4px; }
+
+popover.menu modelbutton,
+popover.menu row,
+popover.menu > contents > list > row {
+  border-radius: 3px;
+  background: none;
+  box-shadow: none;
+}
+
+popover.menu modelbutton:hover,
+popover.menu modelbutton:selected,
+popover.menu > contents > list > row:hover,
+popover.menu > contents > list > row:selected,
+popover.menu row:selected {
+  color: #000000;
+  background-color: #e8f3fc;
+  background-image: linear-gradient(to bottom, #f1f8fe, #dcecfb);
+  box-shadow: inset 0 0 0 1px #a8d8ff;
+}
+
+popover.menu modelbutton:disabled { color: #6d6d6d; }
+
+popover.menu separator,
+popover > contents separator {
+  background-color: #e0e0e0;
+  box-shadow: 0 1px #ffffff;
+}
+
+popover.menu accelerator { color: rgba(0, 0, 0, 0.55); }
+
+/* Dropdown lists (GtkDropDown, AdwComboRow) */
+popover.menu listview > row:selected,
+dropdown popover listview > row:selected {
+  background-image: linear-gradient(to bottom, #f1f8fe, #dcecfb);
+  box-shadow: inset 0 0 0 1px #a8d8ff;
+}
+
+/* Classic menubar */
+menubar {
+  background-color: #f0f0f0;
+  background-image: linear-gradient(to bottom, #f9fafd, #eceff8 40%, #e1e6f3 41%, #eff2f9 89%, #f9fafd 90%, #9aa9cc);
+  box-shadow: none;
+}
+
+menubar > item:hover,
+menubar > item:selected {
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom, #f1f8fe, #dcecfb);
+  box-shadow: inset 0 0 0 1px #a8d8ff;
+}
+
+/************
+ * Tooltips *
+ ************/
+
+tooltip,
+tooltip.background {
+  color: #4c4c4c;
+  background-color: #f6f6f9;
+  background-image: linear-gradient(to bottom, #ffffff, #e4e5f0);
+  box-shadow: none;
+  border: 1px solid #767676;
+  border-radius: 3px;
+}
+
+tooltip label { color: #4c4c4c; }
+
+/********
+ * Tabs *
+ ********/
+
+tabbar tab {
+  color: #000000;
+  border-radius: 4px 4px 0 0;
+}
+
+tabbar tab:hover {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(234, 246, 253, 0.5));
+  box-shadow: inset 0 0 0 1px rgba(60, 127, 177, 0.5);
+}
+
+tabbar tab:selected,
+tabbar tab:checked {
+  background-color: #ffffff;
+  background-image: linear-gradient(to bottom, #ffffff, #f2f7fc);
+  box-shadow: inset 0 0 0 1px #8ba6c9;
+}
+
+notebook > header {
+  background-color: #f0f0f0;
+  box-shadow: inset 0 -1px #898c95;
+}
+
+notebook > header > tabs > tab {
+  color: #000000;
+  background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb 49%, #dddddd 51%, #cfcfcf);
+  box-shadow: inset 0 0 0 1px #898c95;
+  border-radius: 3px 3px 0 0;
+}
+
+notebook > header > tabs > tab:hover {
+  background-image: linear-gradient(to bottom, #eaf6fd, #d9f0fc 49%, #bee6fd 51%, #a7d9f5);
+  box-shadow: inset 0 0 0 1px #3c7fb1;
+}
+
+notebook > header > tabs > tab:checked {
+  background-image: none;
+  background-color: #ffffff;
+  box-shadow: inset 1px 0 #898c95, inset -1px 0 #898c95, inset 0 1px #898c95;
+}
+
+notebook > stack:not(:only-child) { background-color: #ffffff; }
+
+/***********
+ * Dialogs *
+ ***********/
+
+floating-sheet > sheet,
+dialog.alert floating-sheet > sheet {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+dialog.alert .response-area > button {
+  border-radius: 0;
+}
+
+/***********
+ * Banners *
+ ***********/
+
+banner > revealer > widget {
+  color: #000000;
+  background-color: #ffffe1;
+  box-shadow: inset 0 -1px #c4c4a5;
+}
+
+/**********
+ * Toasts *
+ **********/
+
+toast {
+  color: #000000;
+  background-color: #f6f6f9;
+  background-image: linear-gradient(to bottom, #ffffff, #e4e5f0);
+  box-shadow: 0 0 0 1px #767676, 0 2px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+toast button.flat:hover { color: #000000; }
+
+/********************
+ * Window and misc. *
+ ********************/
+
+window.csd {
+  border-radius: 6px 6px 0 0;
+}
+
+window.csd.maximized,
+window.csd.fullscreen,
+window.csd.tiled,
+window.csd.tiled-top,
+window.csd.tiled-left,
+window.csd.tiled-right,
+window.csd.tiled-bottom {
+  border-radius: 0;
+}
+
+/* Text views, the background of plain views */
+textview > text,
+.view,
+iconview {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+/* Spinner and focus ring accents */
+*:focus-visible { outline-color: rgba(51, 153, 255, 0.55); }
+
+/* Rubberband selection in grids and lists */
+rubberband {
+  border: 1px solid #3399ff;
+  background-color: rgba(51, 153, 255, 0.25);
+}
+
+/* Status pages: keep the big icon readable on light backgrounds */
+statuspage > scrolledwindow > viewport > box > clamp > box > .icon { color: rgba(0, 0, 0, 0.45); }
+
+/*****************************************************************
+ * Nautilus (Files)                                              *
+ * App stylesheets load below user CSS, so the generic rules     *
+ * above would otherwise override the app's own tweaks.          *
+ *****************************************************************/
+
+/* Address bar: white field on the glass, like Explorer. */
+.nautilus-pathbar {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 0 0 1px #8ba6c9, inset 0 1px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.nautilus-pathbar:backdrop { background-color: rgba(255, 255, 255, 0.7); }
+
+.nautilus-pathbar button.nautilus-path-button:not(.flat),
+.nautilus-pathbar button.nautilus-path-button.current-dir:not(.flat),
+.nautilus-pathbar > menubutton > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action) {
+  color: #000000;
+  background: none;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+.nautilus-pathbar button.nautilus-path-button:not(.flat):hover,
+.nautilus-pathbar > menubutton > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):hover {
+  background-image: linear-gradient(to bottom, #f2f9ff, #d9ecfc);
+  box-shadow: inset 0 0 0 1px #7da2ce;
+}
+
+.nautilus-pathbar button.nautilus-path-button:not(.flat):active,
+.nautilus-pathbar > menubutton > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):checked {
+  background-image: linear-gradient(to bottom, #cde6f7, #a9d3f0);
+  box-shadow: inset 0 0 0 1px #5e8bbd;
+}
+
+.nautilus-pathbar > scrolledwindow undershoot.left,
+.nautilus-pathbar > scrolledwindow undershoot.right { border-radius: 3px; }
+
+/* Search field inside the header bar */
+.nautilus-query-editor > menubutton > button:not(:checked):not(:hover) {
+  background: none;
+  box-shadow: none;
+}
+
+/* Floating status bar ("3 items selected") */
+.floating-bar {
+  color: #000000;
+  background-color: #f6f6f9;
+  background-image: linear-gradient(to bottom, #ffffff, #e4e5f0);
+  box-shadow: 0 0 0 1px #9aa6b4;
+  border-radius: 4px;
+}
+
+/* Star buttons in list view keep their own look */
+.nautilus-list-view button.star:not(.flat),
+.nautilus-list-view button.star:not(.flat):hover {
+  background: none;
+  box-shadow: none;
+}
+
+/* Grid view tiles: Explorer-style hover/selection, a little rounder */
+.nautilus-grid-view gridview > child { border-radius: 4px; }
+
+/* Disk usage bar in properties */
+.disk-space-used { color: #3399ff; }

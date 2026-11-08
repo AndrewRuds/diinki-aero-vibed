@@ -1,0 +1,86 @@
+/*
+ * Diinki Aero: see-through glass for Blur my Shell
+ *
+ * Makes the window background, header bars and sidebars partly transparent
+ * so Blur my Shell can blur the desktop behind them. File and text views,
+ * popovers, menus and dialogs stay opaque so text is always readable.
+ *
+ * In Blur my Shell: Applications -> enable "Applications blur", then either
+ * add apps to the whitelist (e.g. org.gnome.Nautilus) or turn on
+ * "Blur all applications". Keep its own "Opacity" at 255: the transparency
+ * comes from this file.
+ *
+ * Without the blur, these parts just show the desktop softly through the
+ * window. Comment out the blur.css import in gtk.css to switch this off.
+ */
+
+/* The window itself: light frosted base. Everything else stacks on it. */
+window.background:not(.popup):not(.tooltip),
+window.background:not(.popup):not(.tooltip):backdrop {
+  background-color: rgba(236, 241, 248, 0.6);
+}
+
+/* Header bar glass: only a soft tint, the blur does the rest. */
+headerbar,
+toolbarview > .top-bar,
+.titlebar:not(headerbar) {
+  background-color: transparent;
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.15) 48%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(to bottom, rgba(120, 165, 225, 0.45), rgba(185, 215, 245, 0.35));
+}
+
+headerbar:backdrop,
+toolbarview > .top-bar:backdrop,
+.titlebar:not(headerbar):backdrop {
+  background-color: transparent;
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1) 48%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(to bottom, rgba(170, 185, 205, 0.4), rgba(215, 225, 238, 0.35));
+}
+
+/* Header bars nested in a top bar must stay clear (see aero.css). */
+toolbarview > .top-bar headerbar,
+toolbarview > .top-bar headerbar:backdrop,
+window > .titlebar headerbar,
+window > .titlebar headerbar:backdrop {
+  background: none;
+}
+
+/* Sidebars: glassy, a little whiter than the window. */
+.sidebar-pane,
+.sidebar-pane:backdrop,
+.navigation-sidebar.background {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), rgba(240, 246, 252, 0.3));
+}
+
+/* Content side of split views: nearly solid, so pages read well. */
+.content-pane {
+  background-color: rgba(240, 240, 240, 0.85);
+}
+
+/* Bottom bars get the same tint as the top. */
+toolbarview > .bottom-bar,
+actionbar > revealer > box {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), rgba(220, 232, 246, 0.4));
+}
+
+/* Popovers and dialogs stay solid. */
+popover > contents,
+popover > arrow { background-color: #f5f6f7; }
+
+floating-sheet > sheet,
+sheet { background-color: #f0f0f0; }
+
+/* Nautilus: the file area stays white; its address bar sits on the glass. */
+.nautilus-grid-view,
+.nautilus-list-view,
+.nautilus-grid-view gridview,
+.nautilus-list-view columnview,
+.nautilus-list-view columnview > listview {
+  background-color: #ffffff;
+}
+
+.nautilus-pathbar { background-color: rgba(255, 255, 255, 0.7); }

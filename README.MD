@@ -45,6 +45,15 @@ and then set the theme to the one in use either with `gsettings` or the `dconf` 
 To install the GTK theme, copy the `diinki-aero` folder in `GTKTheme` to your `~/.themes` directory,
 and then set the GTK theme to "diinki-aero" with either `gsettings` or the `dconf` application.
 
+### GTK4 / libadwaita apps (Nautilus, GNOME apps)
+
+Modern GNOME apps use libadwaita and ignore the GTK theme setting. To theme them, copy the
+`GTKTheme/diinki-aero/gtk-4.0` folder to `~/.config/gtk-4.0` (back up your old one first) and restart the apps.
+
+The `blur.css` file in that folder makes header bars and sidebars see-through, for use with the
+Blur my Shell extension (enable its "Applications blur"). Comment out the `blur.css` line in
+`~/.config/gtk-4.0/gtk.css` if you don't want it.
+
 # The Default Keybinds ⌨️
 
 You can edit the keybinds in the hyprland config file as needed to match your preference, by default the most important ones:
